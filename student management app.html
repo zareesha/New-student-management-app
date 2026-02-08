@@ -1,0 +1,197 @@
+
+<!-- saved from url=(0069)file:///C:/Users/Hassan%20Ahmed/Desktop/zeeshan%20firsr%20coding.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body>student-management-mini-project
+│
+├── index.html
+├── style.css
+└── script.js
+
+
+
+    <title>Student Management App</title>
+    <link rel="stylesheet" href="file:///C:/Users/Hassan%20Ahmed/Desktop/style.css">
+
+
+
+<h2>Student Management App</h2>
+
+<div class="form">
+    <input type="text" id="name" placeholder="Student Name">
+    <input type="number" id="age" placeholder="Student Age">
+    <button id="addBtn">Add Student</button>
+</div>
+
+<div id="studentList"></div>
+
+<script src="file:///C:/Users/Hassan%20Ahmed/Desktop/script.js"></script>
+
+
+body {
+    font-family: Arial;
+    background: #f2f2f2;
+    padding: 20px;
+}
+
+h2 {
+    color: #1abc9c;
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 8px;
+    margin: 5px;
+}
+
+button {
+    padding: 8px 12px;
+    background: #1abc9c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #16a085;
+}
+
+.student {
+    background: #eafaf7;
+    border: 1px solid #1abc9c;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+let students = [];
+
+let nameInput = document.getElementById("name");
+let ageInput = document.getElementById("age");
+let addBtn = document.getElementById("addBtn");
+let studentList = document.getElementById("studentList");
+addBtn.addEventListener("click", function () {
+    let name = nameInput.value.trim();
+    let age = ageInput.value;
+
+    if (name === "" || age === "") {
+        alert("Please enter name and age");
+        return;
+    }
+
+    let student = {
+        name: name,
+        age: age
+    };
+
+    students.push(student);
+    nameInput.value = "";
+    ageInput.value = "";
+
+    displayStudents();
+});
+let searchInput = document.getElementById("search");
+
+searchInput.addEventListener("keyup", function () {
+    displayStudents(this.value.toLowerCase());
+});
+addBtn.addEventListener("click", function () {
+    let name = nameInput.value.trim();
+    let age = ageInput.value;
+
+    if (name === "" || age === "") {
+        alert("Please enter name and age");
+        return;
+    }
+
+    let student = {
+        name: name,
+        age: age
+    };
+
+    students.push(student);
+    nameInput.value = "";
+    ageInput.value = "";
+
+    displayStudents();
+});
+div.innerHTML = `
+    <strong>Name:</strong> ${student.name}<br>
+    <strong>Age:</strong> ${student.age}<br>
+    <button onclick="editStudent(${index})">Edit</button>
+    <button onclick="deleteStudent(${index})">Delete</button>
+`;
+<input type="text" id="search" placeholder="Search student by name">
+function editStudent(index) {
+    let newName = prompt("Enter new name:", students[index].name);
+    let newAge = prompt("Enter new age:", students[index].age);
+
+    if (newName === null || newAge === null) return;
+
+    if (newName.trim() === "" || newAge.trim() === "") {
+        alert("Fields cannot be empty");
+        return;
+    }
+
+    students[index].name = newName;
+    students[index].age = newAge;
+
+    saveData();
+    displayStudents();
+}
+function deleteStudent(index) {
+    students.splice(index, 1);
+    displayStudents();
+}
+function saveData() {
+    localStorage.setItem("students", JSON.stringify(students));
+}
+function displayStudents(searchText = "") {
+    studentList.innerHTML = "";
+
+    students.forEach((student, index) =&gt; {
+        if (!student.name.toLowerCase().includes(searchText)) return;
+
+        let div = document.createElement("div");
+        div.className = "student";
+
+        div.innerHTML = `
+            <strong>Name:</strong> ${student.name}<br>
+            <strong>Age:</strong> ${student.age}<br>
+            <button onclick="editStudent(${index})">Edit</button>
+            <button onclick="deleteStudent(${index})">Delete</button>
+        `;
+
+        studentList.appendChild(div);
+    });
+}
+input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    border-radius: 5px;
+}
+
+.student button {
+    margin-right: 5px;
+}
+.student:hover {
+    background: #d1f2eb;
+}
+let student = {
+    name: name,
+    age: age,
+    lab: "AI Lab",
+    status: "Active"
+};
+<strong>Lab:</strong> AI Lab<br>
+<strong>Status:</strong> Active<br>
+window.onload = function () {
+    let data = localStorage.getItem("students");
+    if (data) {
+        students = JSON.parse(data);
+        displayStudents();
+    }
+};</body></html>
